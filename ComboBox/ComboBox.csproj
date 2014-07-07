@@ -57,6 +57,9 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="images\doncho.jpg" />
+    <Content Include="images\ivo.png" />
+    <Content Include="images\joro.jpg" />
     <Content Include="packages.config" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -71,6 +74,7 @@
     <None Include="Scripts\libs\jquery-2.1.1.intellisense.js" />
     <Content Include="index.html" />
     <Content Include="Scripts\controls.js" />
+    <Content Include="Scripts\libs\handlebars-v1.3.0.js" />
     <Content Include="Scripts\libs\handlebars.amd.js" />
     <Content Include="Scripts\libs\handlebars.amd.min.js" />
     <Content Include="Scripts\libs\handlebars.js" />

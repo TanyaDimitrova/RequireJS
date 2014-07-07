@@ -9,18 +9,16 @@
     </style>
 </head>
 <body>
-    <script src="Scripts/libs/handlebars.min.js"></script>
+    <!--<script src="Scripts/libs/handlebars.min.js"></script>-->
     <script src="Scripts/libs/require.js" data-main="Scripts/test"></script>
 
     <div id="combo-box-container"></div>
 
     <script type="text/x-handlebars-template" id="person-template">
-        {{#people}}
         <div class="person-item" id="person-item-{{id}}">
             <strong class="person-name">{{name}}</strong><p class="person-age">{{age}}</p>
             <img src="{{avatarUrl}}" width="100" />
         </div>
-        {{/people}}
     </script>
 </body>
 </html>

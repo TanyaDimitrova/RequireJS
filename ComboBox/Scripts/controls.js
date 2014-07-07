@@ -1,44 +1,54 @@
-﻿define(['jquery', 'handlebars'], function ($) {
+﻿define(["jquery", 'handlebars'], function ($) {
+
     var ComboBox = (function () {
 
         function ComboBox(items) {
+            // Check if the function is used properly
             if (!(this instanceof ComboBox)) {
                 return new ComboBox(items);
             }
-            this._items = items;
+            this.people = items;
         };
 
         ComboBox.prototype.render = function render(template) {
-            var $container = $('#combo-box-container')
-                .addClass('collapsed');
+            var self = this;
+            require(["jquery"], function ($) {
 
-            for (var i = 0; i < this._items.length; i++) {
-                var item = $(template(this._items[i]));
+                var $container = $('#combo-box-container');
+                $container.attr('data-collapsed', 'true');
 
-                $container.append(item);
-            }
-            var $allPersons = $container.find(".person-item");
-            $allPersons.hide()
-                .first()
-                .addClass('selected')
-                .show();
+                $container.on("click", ".person-item", function () {
+                    var $this = $(this);
+                    var isCollapsed = $container.attr('data-collapsed'); 
+                    if (isCollapsed == "true") {
+                        //only a single item, the selected item, is visible
+                        $allPersons.show();
+                        $allPersons.find('.selected').removeClass('selected');
+                        $container.attr('data-collapsed', false);
 
-            $container.on('click', ".person-item", function () {
-                var $this = $(this);
+                    }
+                    else {
+                        $allPersons.hide();
+                        $this.addClass('selected').show();
+                        $container.attr('data-collapsed', true);
+                    }
+                });
 
-                if ($container.hasClass('expanded')) {
-                    $allPersons.find('.selected').removeClass('selected');
-                    $allPersons.hide();
-                    $this.addClass('selected')
-                        .show();
-                }
+                var compiledTemplate = Handlebars.compile(template);
 
-                if ($container.hasClass('collapsed')) {
-                    $allPersons.show();
-                }
+                self.people.forEach(function (person) {
+                    // Compile template for each person
+                    $(compiledTemplate(person)).appendTo($container);
+                });
+
+                var $allPersons = $container.find(".person-item");
+                $allPersons.hide()
+                    .first()
+                    .addClass('selected')
+                    .show();
+
+                return $container;
             });
-
-            return $container;
         };
 
         return ComboBox;
